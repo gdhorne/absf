@@ -12,8 +12,6 @@ A step-by-step guide to the system is presented in a walk-through format suitabl
 
 Step 1: Using Git clone the Automated Build System Framework repository into a subdirectory to which you have write permission.
 
-	$ git clone https://github.com/gdhorne/absf.git
-
 Step 2: Make the subdirectory ./absf the current default subdirectory.
 
 Step 3: List the contents of the subdirectory to verify the cloning process was successful.
