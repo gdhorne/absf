@@ -1,7 +1,6 @@
-ABSF: Automated Build System Framework for Linux From Scratch
+## ABSF: Automated Build System Framework for Linux From Scratch
 (version 1.0)
 
-## Introduction
 
 Automated Build System Framework (ABSF) is a suite of UNIX shell scripts (BASH) to automate the building, in stages, of a GNU/Linux distribution.
 Firstly, a minimal build environment (MBE) is constructed; think of the minimal build environment as the toolbox needed by the system builder.
