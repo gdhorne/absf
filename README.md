@@ -1,4 +1,4 @@
-## ABSF: Automated Build System Framework for Linux From Scratch
+## Automated Build System Framework for Linux From Scratch (ABSF)
 (version 1.0)
 
 
