@@ -1,0 +1,69 @@
+################################################################################
+#
+# Programme Name: ABSF
+# Application Name: absf.sh
+# Description: An automated build system framework to build Linux from Scratch
+#              from source code. 
+#
+# Package Name: gzip-1.3.12.build
+# Description: Source code for the gzip package.
+#
+# Copyright (c) 2003 Gregory D. Horne (horne at member dot fsf dot org)
+# 
+################################################################################
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License (version 2), or 
+#    (at your option) any later version, as published by the Free Software 
+#    Foundation.
+#
+#    The software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with the software; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA.
+#
+################################################################################
+
+
+PROGRAMME=gzip-1.3.12
+ARCHIVE=${PROGRAMME}.tar.gz
+PATCH=
+
+###############################################################################
+# Configure the source code for the package. The system builder can override
+# this default action by including a user_configure() routine in the package
+# build (*.build) specification.
+###############################################################################
+
+user_configure()
+{
+	local CWD=${PWD}
+	cd ${ABSF_WORK}/${PROGRAMME}
+
+	./configure --prefix=/usr --bindir=/bin > /dev/null 2>&1
+
+	cd ${CWD}
+}
+
+###############################################################################
+# Install the files associated with the package. The system builder can
+# override this default action by including a user_install() routine in the
+# package build (*.build) specification.
+###############################################################################
+
+user_install()
+{
+	local CWD=${PWD}
+	cd ${ABSF_WORK}/${PROGRAMME}
+
+	make install > /dev/null 2>&1
+
+	mv /bin/{gzexe,uncompress,zcmp,zdiff,zegrep} /usr/bin
+	mv /bin/{zfgrep,zforce,zgrep,zless,zmore,znew} /usr/bin
+
+	cd ${CWD}
+}

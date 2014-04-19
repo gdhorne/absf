@@ -1,0 +1,101 @@
+################################################################################
+#
+# Programme Name: ABSF
+# Application Name: absf.sh
+# Description: An automated build system framework to build Linux from Scratch
+#              from source code. 
+#
+# Package Name: glibc-2.5.1.build
+# Description: Source code for the glibc package.
+#
+# Copyright (c) 2003 Gregory D. Horne (horne at member dot fsf dot org)
+# 
+################################################################################
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License (version 2), or 
+#    (at your option) any later version, as published by the Free Software 
+#    Foundation.
+#
+#    The software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with the software; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA.
+#
+################################################################################
+
+
+PROGRAMME=glibc-2.5.1
+ARCHIVE=${PROGRAMME}.tar.bz2
+PATCH=
+
+###############################################################################
+# Configure the source code for the package. The system builder can override
+# this default action by including a user_configure() routine in the package
+# build (*.build) specification.
+###############################################################################
+
+user_configure()
+{
+	local CWD=${PWD}
+	mkdir ${ABSF_WORK}/${PROGRAMME}-build
+	cd ${ABSF_WORK}/${PROGRAMME}-build
+
+	CC=${MODE} ../${PROGRAMME}/configure --prefix=${ABSF_BUILD_ROOT} \
+			--disable-profile \
+			--enable-add-ons \
+			--enable-kernel=2.6.0 \
+			--with-binutils=${ABSF_BUILD_ROOT}/bin \
+			--without-gd \
+			--with-headers=${ABSF_BUILD_ROOT}/include \
+			--without-selinux \
+			> /dev/null 2>&1
+
+	cd ${CWD}
+}
+
+###############################################################################
+# Compile the source code for the package. The system builder can override
+# this default action by including a user_compile() routine in the package
+# build (*.build) specification.
+###############################################################################
+
+user_compile()
+{
+	local CWD=${PWD}
+	cd ${ABSF_WORK}/${PROGRAMME}-build
+
+	make -j ${COUNT} > /dev/null 2>&1
+
+	cd ${CWD}
+}
+
+###############################################################################
+# Install the files associated with the package. The system builder can
+# override this default action by including a user_install() routine in the
+# package build (*.build) specification.
+###############################################################################
+
+user_install()
+{
+	local CWD=${PWD}
+	cd ${ABSF_WORK}/${PROGRAMME}-build
+
+	if [ ! -e ${ABSF_BUILD_ROOT}/etc ]
+	then
+		mkdir ${ABSF_BUILD_ROOT}/etc
+	fi
+
+	if [ ! -e ${ABSF_BUILD_ROOT}/etc/ld.so.conf ]
+	then
+		touch ${ABSF_BUILD_ROOT}/etc/ld.so.conf
+	fi
+	
+	make install > /dev/null 2>&1
+
+	cd ${CWD}
+}

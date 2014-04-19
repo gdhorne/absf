@@ -1,0 +1,128 @@
+################################################################################
+#
+# Programme Name: ABSF
+# Application Name: absf.sh
+# Description: An automated build system framework to build Linux from Scratch
+#              from source code. 
+#
+# Packagee Name: glibc-2.5.1.build
+# Description: Source code for the glibc package.
+#
+# Copyright (c) 2003 Gregory D. Horne (horne at member dot fsf dot org)
+# 
+################################################################################
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License (version 2), or 
+#    (at your option) any later version, as published by the Free Software 
+#    Foundation.
+#
+#    The software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with the software; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA.
+#
+################################################################################
+
+
+PROGRAMME=glibc-2.5.1
+ARCHIVE=${PROGRAMME}.tar.bz2
+PATCH=
+
+###############################################################################
+# Configure the source code for the package. The system builder can override
+# this default action by including a user_configure() routine in the package
+# build (*.build) specification.
+###############################################################################
+
+user_configure()
+{
+        local CWD=${PWD}
+        cd ${ABSF_WORK}/${PROGRAMME}
+
+        tar -xzf ${ABSF_PACKAGES}/glibc-libidn-2.5.1.tar.gz
+        mv glibc-libidn-2.5.1 libidn
+
+	sed -i '/vi_VN.TCVN/d' ${ABSF_WORK}/${PROGRAMME}/localedata/SUPPORTED
+
+	sed -i 's|libs -o|libs -L/usr/lib -Wl,-dynamic-linker=/lib/ld-linux.so.2 -o|' ${ABSF_WORK}/${PROGRAMME}/scripts/test-installation.pl 
+
+	sed -i 's|@BASH@|/bin/bash|' ${ABSF_WORK}/${PROGRAMME}/elf/ldd.bash.in
+
+	mkdir ${ABSF_WORK}/${PROGRAMME}-build
+	cd ${ABSF_WORK}/${PROGRAMME}-build
+
+        CC=${MODE} ../${PROGRAMME}/configure --prefix=/usr --disable-profile --enable-add-ons --enable-kernel=2.6.0 --libexecdir=/usr/lib/glibc > /dev/null 2>&1
+
+        cd ${CWD}
+}
+
+###############################################################################
+# Compile the source code for the package. The system builder can override
+# this default action by including a user_compile() routine in the package
+# build (*.build) specification.
+###############################################################################
+
+user_compile()
+{
+        local CWD=${PWD}
+        cd ${ABSF_WORK}/${PROGRAMME}-build
+
+        make -j ${COUNT} > /dev/null 2>&1
+
+        cd ${CWD}
+}
+
+###############################################################################
+# Install the files associated with the package. The system builder can
+# override this default action by including a user_install() routine in the
+# package build (*.build) specification.
+###############################################################################
+
+user_install()
+{
+	local CWD=${PWD}
+	cd ${ABSF_WORK}/${PROGRAMME}-build
+
+	touch /etc/ld.so.conf
+
+	make install > /dev/null 2>&1
+
+	mkdir /usr/lib/locale
+	localedef -i en_US -f ISO-8859-1 en_US
+	localedef -i en_US -f UTF-8 en_US.UTF-8
+	#make localedata/install-locales > /dev/null 2>&1
+
+	cd ${CWD}
+
+cat >> /etc/nsswitch.conf << "EOF"
+
+passwd: files
+group: files
+shadow: files
+
+hosts: files dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+EOF
+
+	tzselect
+
+	cp --remove-destination /usr/share/zoneinfo/America/Halifax /etc/localtime
+
+cat >> /etc/ld.so.conf << "EOF"
+
+/usr/local/lib
+/opt/lib
+
+EOF
+}

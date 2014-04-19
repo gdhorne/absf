@@ -1,0 +1,86 @@
+################################################################################
+#
+# Programme Name: ABSF
+# Application Name: absf.sh
+# Description: An automated build system framework to build Linux from Scratch
+#              from source code. 
+#
+# Module Name: stageFOUNDATION.plan
+# Description: Building plan specifications for FOUNDATION stage.
+#
+# Copyright (c) 2003 Gregory D. Horne (horne at member dot fsf dot org)
+# 
+################################################################################
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License (version 2), or 
+#    (at your option) any later version, as published by the Free Software 
+#    Foundation.
+#
+#    The software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with the software; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA.
+#
+################################################################################
+
+
+linux-2.6.22.5.build clean unpack install clean
+man-pages-2.63.build clean unpack install clean
+glibc-2.5.1.build clean unpack configure compile install clean
+gcc-4.1.2.build fixup
+binutils-2.17.build clean unpack configure compile install clean
+gcc-4.1.2.build clean unpack configure compile install clean
+db-4.5.20.build clean unpack patch configure compile install clean
+sed-4.1.5.build clean unpack configure compile install clean
+e2fsprogs-1.40.2.build clean unpack configure compile install clean
+coreutils-6.9.build clean unpack patch configure compile install clean 
+iana-etc-2.20.build clean unpack compile install clean
+m4-1.4.10.build clean unpack configure compile install clean
+bison-2.3.build clean unpack configure compile install clean
+ncurses-5.6.build clean unpack patch configure compile install clean
+procps-3.2.7.build clean unpack compile install clean
+libtool-1.5.24.build clean unpack configure compile install clean
+perl-5.8.8.build clean unpack configure compile install clean
+readline-5.2.build clean unpack patch configure compile install clean
+zlib-1.2.3.build clean unpack configure compile install clean
+zlib-1.2.3.static.build clean unpack configure compile install clean
+autoconf-2.61.build clean unpack configure compile install clean
+automake-1.10.build clean unpack configure compile install clean
+bash-3.2.build clean unpack patch configure compile install clean
+bzip2-1.0.4.build clean unpack patch compile install clean
+diffutils-2.8.1.build clean unpack patch configure compile install clean
+file-4.21.build clean unpack configure compile install clean
+findutils-4.2.31.build clean unpack configure compile install clean
+flex-2.5.33.build clean unpack configure compile install clean
+grub-0.97.build clean unpack patch configure compile install clean
+gawk-3.1.5.build clean unpack patch configure compile install clean
+gettext-0.16.1.build clean unpack configure compile install clean
+grep-2.5.1a.build clean unpack patch configure compile install clean
+groff-1.18.1.4.build clean unpack patch configure compile install clean
+gzip-1.3.12.build clean unpack configure compile install clean
+inetutils-1.5.build clean unpack patch configure compile install clean
+iproute2-2.6.20-070313.build clean unpack compile install clean
+kbd-1.12.build clean unpack patch configure compile install clean
+less-406.build clean unpack configure compile install clean
+libusb-0.1.12.build clean unpack configure compile install clean
+make-3.81.build clean unpack configure compile install clean
+man-db-2.4.4.build clean unpack patch configure compile install clean
+mktemp-1.5.build clean unpack patch configure compile install clean
+module-init-tools-3.2.2.build clean unpack patch configure compile install clean
+patch-2.5.4.build clean unpack configure compile install clean
+psmisc-22.5.build clean unpack configure compile install clean
+shadow-4.0.18.1.build clean unpack patch configure compile install clean
+sysklogd-1.4.1.build clean unpack patch compile install clean
+sysvinit-2.86.build clean unpack compile install clean
+tar-1.18.build clean unpack configure compile install clean
+texinfo-4.9.build clean unpack patch configure compile install clean
+udev-113.build clean unpack configure compile install clean
+usbutils-0.72.build clean unpack configure compile install clean
+util-linux-2.12r.build clean unpack patch configure compile install clean
+vim-7.1.build clean unpack patch configure compile install clean
+#
