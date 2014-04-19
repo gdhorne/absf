@@ -35,53 +35,6 @@ Step 11: Verify the changes to the configuration file.
 
 Step 12: Execute absf.sh. Enter the superuser account (root) password if prompted.
 
-Stage: MBE - Minimal Build Environment (MBE)
-
-Password: 
-
-Preparing the build environment
-
-Setting up the partition scheme
-Setting up build environment
-Creating subdirectory hierarchy
-
-Filesystem Hierarchy Standard (FHS 2.3)
-...installing directory structure on /mnt/lfs
-
-Creating workspace for MBE
-Extracting LFS packages from ../lfs-packages-6.3.tar
-Changing ownership to lfs user
-
-Processing package binutils-2.17.static.build
-at Sat Mar 15 14:12:39 ADT 2004
-...cleaning
-...unpacking
-...configuring
-...compiling
-...installing
-...cleaning
-
-...
-
-Processing package util-linux-2.12r.build
-at Sat Mar 15 21:08:55 Local time zone must be set--see zic manual page 2004
-...cleaning
-...unpacking
-...configuring
-...compiling
-...installing
-...cleaning
-Changing ownership to super user (root)
-Password:
-
-Stage: SITE - Access build site(SITE)
-
-Password:
-
-Access build site (/tools) as user root
-I have no name!:/#
-
-
 Step 13: List the contents of the root (/) subdirectory.
 
 Step 14: Make the subdirectory /tools the current default subdirectory.
@@ -107,40 +60,11 @@ Step 22: Verify the symbolic link (sh_root) now points to /tools instead of /.
 
 Step 23: Execute absf.sh.
 
-
-Stage: GROUNDBREAKING - Groundbreaking
-
-Creating subdirectory hierarchy...
-bash-3.2# 
-
 Step 24: Verify the the configuration file (igloo.cfg) has been updated as follows:
 1. The GROUNDBREAKING stage has been disabled by adding a hash symbol (#) to STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 2. The FOUNDATION stage has been enabled by removing the hash symbol (#) from STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 
 Step 25: Execute absf.sh.
-
-Stage: FOUNDATION - Foundation
-
-Pouring the foundation...
-
-Processing package linux-2.6.22.5.build
-at Sat Mar 15 21:24:51 Local time zone must be set--see zic manual page 2004
-...cleaning
-...unpacking
-...installing
-...cleaning
-
-...
-
-Processing package vim-7.1.build
-at Sat Mar 15 21:29:56 ADT 2004
-...cleaning
-...unpacking
-...patching
-...configuring
-...compiling
-...installing
-...cleaning
 
 Step 26: Edit the configuration file (absf.cfg) to enable the BOOTABLE stage by removing the hash symbol (#) from that entry of
 STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
@@ -148,28 +72,6 @@ STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 Step 27: Verify the changes to the configuration file.
 
 Step 28: Execute absf.sh.
-
-Stage: BOOTABLE - Make installed system bootable
-
-Processing package lfs-bootscripts-6.3.build
-at Sun Mar 16 12:08:54 ADT 2004
-...cleaning
-...unpacking
-...installing
-...cleaning
-
-Processing package linux-2.6.22.5.build
-at Sun Mar 16 12:08:54 ADT 2004
-...cleaning
-...unpacking
-...configuring
-
-Note: Simply choose 'Exit' to accept the default kernel configuration which has been used to test ABSF.
-
-
-...compiling
-...installing
-...cleaning
 
 Step 29: Make the system bootable using Grand Unified Boot Loader (GRUB). The sample /boot/grub/menu.lst is provided for illustrative purposes and does not cover all possible configurations.
 
