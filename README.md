@@ -17,3 +17,9 @@ well-established and provided an excellent introduction to building, entirely fr
 In summary, Automated Build System Framework is a development framework which provides the means to produce a highly-customizable GNU/Linux
 distribution. Hopefully, Automated Build System Framework proves useful as both a means of learning about development of a GNU/Linux
 distribution and more generally as an introduction to using BASH for moderately complex software projects.
+
+## License
+
+Copyright © 2003 Gregory D. Horne.
+
+This software is released under the GNU GPL (version 2), and may be redistributed under the terms specified in the LICENSE file.

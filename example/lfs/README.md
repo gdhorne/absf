@@ -80,3 +80,10 @@ Step 30: The File Hierarchy Standard (FHS) mandates that a symbolic link be prov
 Step 31: Now exit the Igloo Builder system and reboot the host computer after updating the boot loader of the host system to included an entry for the newly built system.
 
 Step 32. Reboot the computer system. If everything works properly you should be able to choose your freshly built operating system.
+
+## License
+
+Copyright © 2003 Gregory D. Horne.
+
+This software is released under the GNU GPL (version 2), and may be redistributed under the terms specified in the LICENSE file.
+
