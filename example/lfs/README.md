@@ -51,7 +51,8 @@ Step 19: List the contents of the /tools/root subdirectory.
 
 Step 20: Make the subdirectory ./igloo the current default subdirectory.
 
-Step 21: Verify the the configuration file (igloo.cfg) has been updated as follows:
+Step 21: Verify the the configuration file (absf.cfg) has been updated as follows:
+
 1. The MBE stage and SITE stage have been disabled by adding a hash symbol (#) to STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 2. The GROUNDBREAKING stage has been enabled by removing the hash symbol (#) from STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 3. The LFS and LFS_ROOT environment variables have been changed from /tool to /.
@@ -61,6 +62,7 @@ Step 22: Verify the symbolic link (sh_root) now points to /tools instead of /.
 Step 23: Execute absf.sh.
 
 Step 24: Verify the the configuration file (igloo.cfg) has been updated as follows:
+
 1. The GROUNDBREAKING stage has been disabled by adding a hash symbol (#) to STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 2. The FOUNDATION stage has been enabled by removing the hash symbol (#) from STAGES="#MBE #SITE #GROUNDBREAKING #FOUNDATION #BOOTABLE".
 
